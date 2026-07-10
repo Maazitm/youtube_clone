@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube/widgets/ytActionButtonWidget.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Videoplayerscreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
     super.initState();
 
     final videoId = YoutubePlayer.convertUrlToId(
-      "https://youtu.be/cL7Ac_39Bxg?si=wj8Pw5AaevP6W_Mc",
+      "https://youtu.be/05DrDxjMEbU?si=-S-meYb5S6aZ8VTK",
     );
 
     _controller = YoutubePlayerController(
@@ -33,50 +34,7 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
     super.dispose();
   }
 
-  Widget _buildActionButton(IconData icon, String label) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          Icon(icon, size: 20, color: Colors.black),
-          const SizedBox(width: 6),
-          Text(
-            label,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget suggestedVideo(Color color, String title) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Column(
-        children: [
-          Container(height: 220, width: double.infinity, color: color),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              const CircleAvatar(radius: 20, child: Icon(Icons.person)),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  title,
-                  style: const TextStyle(fontWeight: FontWeight.w600),
-                ),
-              ),
-              const Icon(Icons.more_vert),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -211,7 +169,7 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
                                       }
                                     });
                                   },
-                                  child: _buildActionButton(
+                                  child: buildActionButton(
                                     isliked
                                         ? Icons.thumb_up
                                         : Icons.thumb_up_alt_outlined,
@@ -219,22 +177,23 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                _buildActionButton(
+                                
+                                buildActionButton(
                                   Icons.thumb_down_alt_outlined,
                                   "Dislike",
                                 ),
                                 const SizedBox(width: 8),
-                                _buildActionButton(
+                                buildActionButton(
                                   Icons.reply_outlined,
                                   "Share",
                                 ),
                                 const SizedBox(width: 8),
-                                _buildActionButton(
+                                buildActionButton(
                                   Icons.download_outlined,
                                   "Download",
                                 ),
                                 const SizedBox(width: 8),
-                                _buildActionButton(
+                                buildActionButton(
                                   Icons.library_add_outlined,
                                   "Save",
                                 ),
@@ -244,37 +203,41 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
 
                           const SizedBox(height: 20),
 
-                          // const Text(
-                          //   "Suggested Videos",
-                          //   style: TextStyle(
-                          //     fontSize: 18,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
+                          const Text(
+                            "Suggested Videos",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
 
-                          // const SizedBox(height: 12),
+                          const SizedBox(height: 12),
 
-                          // suggestedVideo(
-                          //   Colors.grey,
-                          //   "NASA discovers alien life on Mars",
-                          // ),
+                          suggestedVideo(
+                            Colors.grey,
+                            "NASA discovers alien life on Mars",
+                            Icons.person,
+                          ),
 
-                          // suggestedVideo(Colors.red, "Top 10 Doraemon Gadgets"),
+                          suggestedVideo(Colors.red, "Top 10 Doraemon Gadgets" , Icons.abc),
 
-                          // suggestedVideo(
-                          //   Colors.green,
-                          //   "Shinchan Funny Moments",
-                          // ),
+                          suggestedVideo(
+                            Colors.green,
+                            "Shinchan Funny Moments",
+                            Icons.add
+                          ),
 
-                          // suggestedVideo(
-                          //   Colors.blue,
-                          //   "Amazing Space Documentary",
-                          // ),
+                          suggestedVideo(
+                            Colors.blue,
+                            "Amazing Space Documentary",
+                            Icons.alarm_rounded
+                          ),
 
-                          // suggestedVideo(
-                          //   Colors.orange,
-                          //   "Flutter Complete Course",
-                          // ),
+                          suggestedVideo(
+                            Colors.orange,
+                            "Flutter Complete Course",
+                            Icons.account_balance_wallet_sharp
+                          ),
                         ],
                       ),
                     ),
