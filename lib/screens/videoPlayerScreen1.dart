@@ -34,8 +34,6 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
     super.dispose();
   }
 
- 
-
   @override
   Widget build(BuildContext context) {
     return YoutubePlayerBuilder(
@@ -177,7 +175,7 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
                                   ),
                                 ),
                                 const SizedBox(width: 8),
-                                
+
                                 buildActionButton(
                                   Icons.thumb_down_alt_outlined,
                                   "Dislike",
@@ -216,27 +214,36 @@ class _VideoplayerscreenState extends State<Videoplayerscreen> {
                           suggestedVideo(
                             Colors.grey,
                             "NASA discovers alien life on Mars",
-                            Icons.person,
+                            'https://images.seeklogo.com/logo-png/36/1/nasa-logo-png_seeklogo-369096.png',
+                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFS7qZI7TDKUvcWqIfnWMghgJLWmukAm7WdvChyHRP-A&s=10',
                           ),
 
-                          suggestedVideo(Colors.red, "Top 10 Doraemon Gadgets" , Icons.abc),
+                          suggestedVideo(
+                            Colors.red,
+                            "Top 10 Doraemon Gadgets",
+                            '',
+                            '',
+                          ),
 
                           suggestedVideo(
                             Colors.green,
                             "Shinchan Funny Moments",
-                            Icons.add
+                            '',
+                            '',
                           ),
 
                           suggestedVideo(
                             Colors.blue,
                             "Amazing Space Documentary",
-                            Icons.alarm_rounded
+                            '',
+                            '',
                           ),
 
                           suggestedVideo(
                             Colors.orange,
                             "Flutter Complete Course",
-                            Icons.account_balance_wallet_sharp
+                            '',
+                            '',
                           ),
                         ],
                       ),
