@@ -55,14 +55,18 @@ Widget suggestedVideo(
                     title,
                     style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
-                   Text(
+                  Text(
                     title,
-                    style: const TextStyle(  fontSize: 12  ,fontWeight: FontWeight.w400 , color: Colors.grey),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.grey,
+                    ),
                   ),
                 ],
               ),
             ),
-            const Icon(Icons.more_vert , size: 20,),
+            const Icon(Icons.more_vert, size: 20),
           ],
         ),
       ],
