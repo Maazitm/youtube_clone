@@ -201,7 +201,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Stack(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, '/videoPlayerScreen');
                   },
                   child: Container(
@@ -325,20 +325,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: 250,
-                      width: 150,
-                      margin: EdgeInsets.symmetric(vertical: 8),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(8),
-                        image: DecorationImage(
-                          image: AssetImage(
-                            "assets/short/shorts${index + 1}.png",
+                  return InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/shortsScreen');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 250,
+                        width: 150,
+                        margin: EdgeInsets.symmetric(vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(8),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              "assets/short/shorts${index + 1}.png",
+                            ),
+                            fit: BoxFit.fill,
                           ),
-                          fit: BoxFit.fill,
                         ),
                       ),
                     ),
