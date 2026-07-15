@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/screens/mainNavigationScreen.dart';
 import 'package:youtube/screens/shortsScreen.dart';
+import 'package:youtube/screens/test_screen.dart';
 import 'package:youtube/screens/videoPlayerScreen.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MainNavigationScreen(),
+        '/': (context) => TestScreen(),
         '/videoPlayerScreen': (context) => Videoplayerscreen(),
         '/shortsScreen': (context) => ShortsScreen(),
       },

@@ -25,7 +25,7 @@ class _ShortsScreenState extends State<ShortsScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: videoId,
       flags: const YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
         mute: false,
         loop: true,
         hideControls: true, // CRITICAL: Hides default YT web controls
