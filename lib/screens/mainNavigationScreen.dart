@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:youtube/screens/homeScreen.dart';
 import 'package:youtube/screens/shortsScreen.dart';
+import 'package:youtube/screens/uploadVideoScreen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -16,7 +17,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const ShortsScreen(),
-    const Center(child: Text('Add/Upload Screen')),
+    const UploadVideoScreen(),
     const Center(child: Text('Subscriptions Screen')),
     const Center(child: Text('Profile Screen')),
   ];

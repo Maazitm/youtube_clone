@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +12,22 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    // 1. Get screen width to determine responsiveness
+    final double screenWidth = MediaQuery.of(context).size.width;
+
+    // 2. Decide how many columns based on device type
+    int crossAxisCount = 1; // Default for mobile
+    if (screenWidth > 1200) {
+      crossAxisCount = 4; // Large Desktop
+    } else if (screenWidth > 800) {
+      crossAxisCount = 3; // Laptop
+    } else if (screenWidth > 600) {
+      crossAxisCount = 2; // Tablet
+    }
+
+    // 3. Calculate width for each video card (subtracting padding)
+    double cardWidth = crossAxisCount == 1 ? screenWidth : (screenWidth / crossAxisCount) - 16;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -41,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
           style: GoogleFonts.oswald(
             color: Colors.black,
             fontSize: 25,
-          ), // Text is now black
+          ), 
         ),
         actions: [
           const Icon(Icons.cast, color: Colors.black, size: 25),
@@ -72,227 +89,124 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // TOP CATEGORIES (Scrolls horizontally)
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12.0,
-                vertical: 8.0,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
               child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal, // Allows horizontal scrolling
+                scrollDirection: Axis.horizontal, 
                 child: Row(
                   children: [
-                    // 1. Compass Icon
                     Container(
                       padding: const EdgeInsets.all(4),
-                      child: const Icon(
-                        Icons.explore,
-                        color: Colors.black,
-                        size: 25,
-                      ),
+                      child: const Icon(Icons.explore, color: Colors.black, size: 25),
                     ),
                     const SizedBox(width: 16),
-                    // 2. "All" Button
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF0F0F0F), // Near black
+                        color: const Color(0xFF0F0F0F), 
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
                         "All",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w500),
                       ),
                     ),
                     const SizedBox(width: 10),
-
-                    // 3. "New to you" Button with Gradient Border
                     Container(
-                      padding: const EdgeInsets.all(
-                        1.5,
-                      ), // This acts as the border width
+                      padding: const EdgeInsets.all(1.5), 
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         gradient: const LinearGradient(
-                          colors: [
-                            Color(0xFF534C7C), // Purple/Blue
-                            Color(0xFFA54B76), // Pink
-                            Color(0xFFC7556A), // Red
-                          ],
+                          colors: [Color(0xFF534C7C), Color(0xFFA54B76), Color(0xFFC7556A)],
                           begin: Alignment.centerLeft,
                           end: Alignment.centerRight,
                         ),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 6.5,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6.5),
                         decoration: BoxDecoration(
-                          color: const Color(
-                            0xFFF2F2F2,
-                          ), // Inner background color
-                          borderRadius: BorderRadius.circular(
-                            6.5,
-                          ), // Slightly smaller than outer radius
+                          color: const Color(0xFFF2F2F2), 
+                          borderRadius: BorderRadius.circular(6.5), 
                         ),
                         child: const Text(
                           "New to you",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    SizedBox(width: 10),
-                    // 4. "UX design" Button
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF2F2F2), // Light grey
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text(
-                        "UX design",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
+                          style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
                         ),
                       ),
                     ),
                     const SizedBox(width: 10),
-                    // 5. "Figma" Button
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF2F2F2), // Light grey
+                        color: const Color(0xFFF2F2F2),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Text(
+                        "UX design",
+                        style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF2F2F2), 
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
                         "Figma",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
+                        style: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w500),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            Stack(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, '/videoPlayerScreen');
-                  },
-                  child: Container(
-                    height: 250,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/mars.png"),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
-
-                Positioned(
-                  top: 230,
-                  right: 0,
-                  left: 350,
-                  bottom: 0,
-                  child: Container(
-                    height: 25,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(180, 0, 0, 0),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "16:35",
-                        style: GoogleFonts.oswald(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            
+            // MAIN VIDEO FEED (Responsive Wrap)
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Wrap(
+                spacing: 12, // Space between cards on same row
+                runSpacing: 16, // Space between rows
                 children: [
-                  Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      shape: BoxShape.circle,
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/nasa_logo.png'),
-                      ),
+                  // VIDEO 1: Mars
+                  SizedBox(
+                    width: cardWidth,
+                    child: _buildVideoCard(
+                      context: context,
+                      thumbnailPath: "assets/images/mars.png",
+                      logoPath: "assets/images/nasa_logo.png",
+                      onTapRoute: '/videoPlayerScreen',
                     ),
                   ),
-                  SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Breaking! NASA discovers alien life \non Mars ",
-                        style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        "NASA • 99.2 M views  • Now",
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
+
+                  // VIDEO 2: Volcano
+                  SizedBox(
+                    width: cardWidth,
+                    child: _buildVideoCard(
+                      context: context,
+                      thumbnailPath: "assets/images/volcano.png",
+                      logoPath: "assets/images/volcano_logo.png",
+                      onTapRoute: '/videoPlayerScreen', // Add your route if needed
+                    ),
                   ),
-                  Spacer(),
-                  Icon(Icons.more_vert, color: Colors.black, size: 20),
                 ],
               ),
             ),
-            SizedBox(height: 14),
-            Divider(
-              color: const Color.fromARGB(255, 215, 215, 215),
+
+            const SizedBox(height: 14),
+            const Divider(
+              color: Color.fromARGB(255, 215, 215, 215),
               thickness: 8,
               height: 1,
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
+
+            // SHORTS SECTION
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -300,13 +214,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: 35,
                     width: 35,
-                    decoration: BoxDecoration(
-                      image: const DecorationImage(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
                         image: AssetImage('assets/images/shorts.png'),
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Text(
                     "Shorts",
                     style: GoogleFonts.oswald(
@@ -319,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             SizedBox(
-              height: 250,
+              height: 250, // Keep your original height
               width: double.infinity,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
@@ -334,14 +248,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Container(
                         height: 250,
                         width: 150,
-                        margin: EdgeInsets.symmetric(vertical: 8),
+                        margin: const EdgeInsets.symmetric(vertical: 8),
                         decoration: BoxDecoration(
                           color: Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(8),
                           image: DecorationImage(
-                            image: AssetImage(
-                              "assets/short/shorts${index + 1}.png",
-                            ),
+                            // EXACT PATH KEPT HERE
+                            image: AssetImage("assets/short/shorts${index + 1}.png"),
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -351,92 +264,116 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
             ),
-            Stack(
-              children: [
-                Container(
-                  height: 250,
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // ==========================================
+  // EXTRACTED REUSABLE WIDGET FOR EXACT UI
+  // ==========================================
+  Widget _buildVideoCard({
+    required BuildContext context,
+    required String thumbnailPath,
+    required String logoPath,
+    required String onTapRoute,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Stack(
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, onTapRoute);
+              },
+              child: AspectRatio(
+                // Aspect ratio makes sure it scales nicely on desktop without hardcoding height to 250
+                aspectRatio: 16 / 9, 
+                child: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.grey.shade300,
                     image: DecorationImage(
-                      image: AssetImage("assets/images/volcano.png"),
+                      image: AssetImage(thumbnailPath), // Exact Path
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 230,
-                  right: 0,
-                  left: 350,
-                  bottom: 0,
-                  child: Container(
-                    height: 25,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(180, 0, 0, 0),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "16:35",
-                        style: GoogleFonts.oswald(
-                          color: Colors.white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+              ),
+            ),
+            Positioned(
+              right: 8,
+              bottom: 8,
+              child: Container(
+                height: 25,
+                width: 45,
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(180, 0, 0, 0),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Center(
+                  child: Text(
+                    "16:35",
+                    style: GoogleFonts.oswald(
+                      color: Colors.white,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 45,
-                    width: 45,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      shape: BoxShape.circle,
-                      image: const DecorationImage(
-                        image: AssetImage('assets/images/volcano_logo.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 8),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Breaking! NASA discovers alien life \non Mars ",
-                        style: GoogleFonts.poppins(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      Text(
-                        "NASA • 99.2 M views  • Now",
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  Icon(Icons.more_vert, color: Colors.black, size: 20),
-                ],
               ),
             ),
           ],
         ),
-      ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 45,
+                width: 45,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: AssetImage(logoPath), // Exact Path
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded( // Prevents overflow on smaller screens
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Breaking! NASA discovers alien life \non Mars ",
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Text(
+                      "NASA • 99.2 M views  • Now",
+                      style: GoogleFonts.poppins(
+                        color: Colors.grey,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.more_vert, color: Colors.black, size: 20),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

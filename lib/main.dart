@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:youtube/screens/mainNavigationScreen.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:youtube/screens/homeScreen.dart';
+
 import 'package:youtube/screens/shortsScreen.dart';
-import 'package:youtube/screens/test_screen.dart';
+import 'package:youtube/screens/testScreen.dart';
 import 'package:youtube/screens/videoPlayerScreen.dart';
 
 void main() {
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

@@ -42,116 +42,137 @@ class _ShortsScreenState extends State<ShortsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // 1. Grab screen dimensions using MediaQuery
+    final size = MediaQuery.of(context).size;
+    final screenWidth = size.width;
+    final screenHeight = size.height;
+
+    // 2. Determine the player width based on device type
+    double playerWidth = screenWidth;
+    if (screenWidth > 1000) {
+      playerWidth = 450; // Desktop: Constrain width to look like a phone screen
+    } else if (screenWidth > 600) {
+      playerWidth = 400; // Tablet: Constrain width slightly
+    }
+
     return Scaffold(
       backgroundColor: Colors.black, // Shorts background is always black
       body: SafeArea(
-        child: Stack(
-          children: [
-            // 1. The Video Player Background
-            Positioned.fill(
-              child: FittedBox(
-                fit: BoxFit.cover,
-                // We wrap it in a pointer interceptor so tapping the video 
-                // doesn't trigger the hidden webview controls
-                child: AbsorbPointer(
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: YoutubePlayer(
-                      controller: _controller,
-                      showVideoProgressIndicator: true,
+        // 3. Center the constrained player on larger screens
+        child: Center(
+          child: SizedBox(
+            width: playerWidth, // Applies the responsive width
+            height: screenHeight,
+            child: Stack(
+              children: [
+                // 1. The Video Player Background
+                Positioned.fill(
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    // We wrap it in a pointer interceptor so tapping the video 
+                    // doesn't trigger the hidden webview controls
+                    child: AbsorbPointer(
+                      child: SizedBox(
+                        // Updated to use the responsive playerWidth instead of full screenWidth
+                        width: playerWidth,
+                        height: screenHeight,
+                        child: YoutubePlayer(
+                          controller: _controller,
+                          showVideoProgressIndicator: true,
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ),
 
-            // 2. Right Side Action Buttons
-            Positioned(
-              right: 12,
-              bottom: 40,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _buildActionIcon(
-                    icon: isLiked ? Icons.thumb_up : Icons.thumb_up_outlined,
-                    label: "12K",
-                    color: isLiked ? Colors.blue : Colors.white,
-                    onTap: () {
-                      setState(() {
-                        isLiked = !isLiked;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 25),
-                  _buildActionIcon(icon: Icons.thumb_down_outlined, label: "Dislike"),
-                  const SizedBox(height: 25),
-                  _buildActionIcon(icon: Icons.comment, label: "405"),
-                  const SizedBox(height: 25),
-                  _buildActionIcon(icon: Icons.reply, label: "Share"),
-                  const SizedBox(height: 25),
-                  _buildActionIcon(icon: Icons.more_horiz, label: ""),
-                ],
-              ),
-            ),
-
-            // 3. Bottom Left Channel Info
-            Positioned(
-              left: 12,
-              bottom: 40,
-              right: 80, // Prevent overlapping with right icons
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+                // 2. Right Side Action Buttons
+                Positioned(
+                  right: 12,
+                  bottom: 40,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const CircleAvatar(
-                        radius: 18,
-                        backgroundImage: NetworkImage(
-                          "https://ui-avatars.com/api/?name=Channel&background=random",
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        "@Maazitm",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      ElevatedButton(
-                        onPressed: () {
+                      _buildActionIcon(
+                        icon: isLiked ? Icons.thumb_up : Icons.thumb_up_outlined,
+                        label: "12K",
+                        color: isLiked ? Colors.blue : Colors.white,
+                        onTap: () {
                           setState(() {
-                            textValue = textValue == "Subscribe" 
-                                ? "Subscribed" 
-                                : "Subscribe";
+                            isLiked = !isLiked;
                           });
                         },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: textValue == "Subscribe" 
-                              ? Colors.white 
-                              : Colors.grey.withOpacity(0.5),
-                          foregroundColor: Colors.black,
-                          minimumSize: const Size(80, 32),
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                        ),
-                        child: Text(textValue),
-                      )
+                      ),
+                      const SizedBox(height: 25),
+                      _buildActionIcon(icon: Icons.thumb_down_outlined, label: "Dislike"),
+                      const SizedBox(height: 25),
+                      _buildActionIcon(icon: Icons.comment, label: "405"),
+                      const SizedBox(height: 25),
+                      _buildActionIcon(icon: Icons.reply, label: "Share"),
+                      const SizedBox(height: 25),
+                      _buildActionIcon(icon: Icons.more_horiz, label: ""),
                     ],
                   ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    "This is an amazing Flutter Shorts clone layout! 🚀 #flutter #dart",
-                    style: TextStyle(color: Colors.white, fontSize: 14),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                ),
+
+                // 3. Bottom Left Channel Info
+                Positioned(
+                  left: 12,
+                  bottom: 40,
+                  right: 80, // Prevent overlapping with right icons
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 18,
+                            backgroundImage: NetworkImage(
+                              "https://ui-avatars.com/api/?name=Channel&background=random",
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          const Text(
+                            "@Maazitm",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                textValue = textValue == "Subscribe" 
+                                    ? "Subscribed" 
+                                    : "Subscribe";
+                              });
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: textValue == "Subscribe" 
+                                  ? Colors.white 
+                                  : Colors.grey.withOpacity(0.5),
+                              foregroundColor: Colors.black,
+                              minimumSize: const Size(80, 32),
+                              padding: const EdgeInsets.symmetric(horizontal: 12),
+                            ),
+                            child: Text(textValue),
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      const Text(
+                        "This is an amazing Flutter Shorts clone layout! 🚀 #flutter #dart",
+                        style: TextStyle(color: Colors.white, fontSize: 14),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
