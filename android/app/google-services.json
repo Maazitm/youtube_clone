@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "930832494017",
+    "project_id": "youtube-clone-maaz",
+    "storage_bucket": "youtube-clone-maaz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930832494017:android:8e290e8eb63113683a9340",
+        "android_client_info": {
+          "package_name": "com.example.youtube"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYB2tM4EbwwLh4NLY-8GQ_g0jLmH8_qlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
